@@ -1,0 +1,93 @@
+<div class="content-wrapper" style="height:80vh">
+
+    <section class="content-header">
+        
+    </section>
+
+    <section class="content" style="min-height:0px">
+        <div class="row">
+            <div class="col-lg-3">
+                <!-- small box -->
+                <div class="small-box bg-aqua" style="height: 150px">
+                    <div class="inner">
+                        <h3>11{{Model.cWeight.toFixed(2)}}</h3>
+                        <p style="font-size:large">KG</p>
+                        <button ng-click="tareSet()" type="button" class="btn btn-block btn-sm" style="color: black;font-weight: bold;font-size: large;">SET TARE WEIGHT</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-3">
+                <!-- small box -->
+                <div class="small-box bg-green" style="height: 150px">
+                    <div class="inner">
+                        <h3>{{Model.totalPackedCount}}<sup style="font-size: 20px"></sup></h3>
+                        <p style="font-size:large">TOTAL PACKED</p>
+                        <button ng-click="reset()" type="button" class="btn btn-block btn-sm" style="color: black;font-weight: bold;font-size: large;">RESET COUNT</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-6 connectedSortable">
+                <div class="box box-info">
+                    <div class="box-body">
+                        <form>
+                            <div class="form-group col-lg-6">
+                                <label>SELECT PRODUCT</label>
+                                <select class="form-control" ng-model="Model.selectedProduct" ng-options="item as item.Name + ' , ' + item.Weight + ' gms.'   for item in Model.productList"></select>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>ENTER TARE WEIGHT</label>
+                                <input type="text" ng-model="Model.tareWeight" class="form-control" name="" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>PRINT COPY</label>
+                                <input type="number" ng-model="Model.printcopy" class="form-control" name="" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>EXTRA FIELD 1</label>
+                                <input type="text" ng-model="Model.extra1" class="form-control" name="" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>EXTRA FIELD 2</label>
+                                <input type="text" ng-model="Model.extra2" class="form-control" name="" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>REMARKS</label>
+                                <textarea class="form-control" ng-model="Model.remarks" rows="3" placeholder=""></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div class="form-group col-lg-6">
+                            <button ng-click="testPrint()" type="button" class="pull-left btn btn-default">Test Print
+                                <i class="fa fa-arrow-circle-right"></i></button>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <button ng-click="save()" type="button" class="pull-right btn btn-default">Print
+                                <i class="fa fa-arrow-circle-right"></i></button>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="col-lg-6 connectedSortable">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">DUPLICATE PRINT - ENTER BARCODE NO</h3>
+                    </div>
+                    <div class="box-body">
+                        <input ng-model="Model.duplicate" ng-keypress="duplicate($event)" class="form-control input-lg" type="text" placeholder="">
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+

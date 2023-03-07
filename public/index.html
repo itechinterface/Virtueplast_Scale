@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>VIRTUE PLAST PVT. LTD.</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="bower_components/morris.js/morris.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>-->
+
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-route.js"></script>
+  <script src="js/socket.io-1.4.5.js"></script>
+  <script src="js/app.js"></script>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini" ng-app="myApp" ng-controller="main">
+<div style="background-color: #222d32">
+  <header class="main-header" ng-show="!scaleMode">
+    <a href="Home.html" class="logo">
+      <span class="logo-lg"><b>VIRTUE</b>PLAST</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only"></span>
+      </a>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar" ng-show="!scaleMode">
+
+    <section class="sidebar" ng-show="scaleMode">
+
+      <ul class="sidebar-menu" data-widget="tree">
+        <!-- <li class="header">MAIN NAVIGATION</li> -->
+        <li class="active treeview">
+          <a ng-click="dashboard()">
+            <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar" ng-show="Model.isLogin">
+      <!-- Sidebar user panel -->
+      <!--<div class="user-panel" style="height: auto">-->
+        <!--<div class="pull-left">-->
+          <!--<p style="font-size: medium;color: white;font-weight: normal;text-transform:uppercase">{{Model.user.FullName}}</p>-->
+          <!--<p style="font-size: medium;color: white;font-weight: normal">SHIFT : {{Model.user.shift.Name}}</p>-->
+          <!--<p style="font-size: medium;color: white;font-weight: normal">Emp.Code : {{Model.user.Code}}</p>-->
+          <!--<a href="#" style="font-size: large;color: white;font-weight: bold">LOG OUT</a>-->
+        <!--</div>-->
+      <!--</div>-->
+      <ul class="sidebar-menu" data-widget="tree">
+        <!-- <li class="header">MAIN NAVIGATION</li> -->
+        <li class="active treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
+          </a>
+        </li>
+        <li><a><i class="fa fa-circle-o text-green"></i> <span>{{Model.user.FullName | uppercase}}</span></a></li>
+        <li><a><i class="fa fa-circle-o text-aqua"></i> <span>SHIFT : {{Model.user.shift.Name | uppercase}}</span></a></li>
+        <li><a><i class="fa fa-circle-o text-red"></i> <span>EMP.CODE : {{Model.user.Code | uppercase}}</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-warning"></i> <span>LOG OUT</span></a></li>
+
+        <!--<li class="header">SWITCH PROGRAM</li>-->
+        <!--<li><a ng-click="rollcut()"><i class="fa fa-circle-o text-green"></i> <span>FABRIC ROLL CUT</span></a></li>-->
+        <!--<li><a ng-click="lamination()"><i class="fa fa-circle-o text-aqua"></i> <span>LAMINATION</span></a></li>-->
+        <!--<li><a ng-click="printing()"><i class="fa fa-circle-o text-red"></i> <span>PRINTING</span></a></li>-->
+        <!--<li><a ng-click="reverse()"><i class="fa fa-circle-o text-warning"></i> <span>REVERSING</span></a></li>-->
+        <!--<li><a ng-click="finishing()"><i class="fa fa-circle-o text-aqua"></i> <span>FINISHING</span></a></li>-->
+        <!--<li><a ng-click="dispatch()"><i class="fa fa-circle-o text-yellow"></i> <span>DISPATCH</span></a></li>-->
+
+        <!--<li class="header">MASTER DATA</li>-->
+        <!--<li><a ng-click="operator_master()"><i class="fa fa-circle-o text-yellow"></i> <span>OPERATOR MASTER</span></a></li>-->
+        <!--<li><a ng-click="company_master()"><i class="fa fa-circle-o text-yellow"></i> <span>COMPANY MASTER</span></a></li>-->
+        <!--<li><a ng-click="material_master()"><i class="fa fa-circle-o text-yellow"></i> <span>PRODUCT MASTER</span></a></li>-->
+        <!--<li><a ng-click="report()"><i class="fa fa-circle-o text-yellow"></i> <span>REPORT</span></a></li>-->
+
+
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <div ng-view keyshortcut>
+
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer" ng-show="!scaleMode">
+    <div class="pull-right hidden-xs">
+      <!-- <b>Version</b> 1.0.0 -->
+    </div>
+    <strong><div style="color: #9e0505">ACCENT INSTRUMENTS</div>ADDRESS : 52, Shukan mall, Science City Road, Sola,Ahmedabad, Gujarat 380060 <br>CONTACT : 098243 12729 </strong>
+  </footer>
+
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<script src="js/bootbox.min.js"></script>
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Sparkline -->
+<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<!-- daterangepicker -->
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- Slimscroll -->
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!--<script src="dist/js/pages/dashboard.js"></script>-->
+<!-- AdminLTE for demo purposes -->
+<!--<script src="dist/js/demo.js"></script>-->
+</body>
+</html>

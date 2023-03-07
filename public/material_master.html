@@ -1,0 +1,88 @@
+<div class="content-wrapper" style="height:1000vh">
+
+    <section class="content-header">
+        <h1>
+            MATERIAL MASTER
+        </h1>
+        <br>
+        <a ng-click="Model.newForm = !Model.newForm" style="font-size: medium">Create New</a>
+
+    </section>
+
+    <section class="content" style="min-height:0px">
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-6 connectedSortable" ng-show="Model.newForm">
+                <!-- quick email widget -->
+                <div class="box box-info">
+                    <div class="box-body">
+                        <form>
+                            <div class="form-group col-lg-12">
+                                <label>MATERIAL QUALITY</label>
+                                <input ng-model="Model.quality" class="form-control" type="text" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>MATERIAL CODE</label>
+                                <input ng-model="Model.code" class="form-control" type="text" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>SELECT COMPANY</label>
+                                <select class="form-control" ng-model="Model.selectedCompany" ng-options="item as item.Name + ' , ' + item.Location for item in Model.companyList"></select>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>EXTRA FIELD 1</label>
+                                <input ng-model="Model.extra1" class="form-control" type="text" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>EXTRA FIELD 2</label>
+                                <input ng-model="Model.extra2" class="form-control" type="text" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>REMARKS</label>
+                                <textarea class="form-control" ng-model="Model.remarks" rows="3" placeholder=""></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <button ng-click="save()" type="button" class="pull-right btn btn-default">SAVE
+                            <i class="fa fa-arrow-circle-right"></i></button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding" style="font-size: medium">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Material Quality</th>
+                                <th>Company</th>
+                                <th>Extra1</th>
+                                <th>Extra2</th>
+                                <th>Remarks</th>
+                                <th>Delete</th>
+                            </tr>
+                            <tr ng-repeat="item in Model.materialList">
+                                <td>{{item.Quality}}</td>
+                                <td>{{item.Company}}</td>
+                                <td>{{item.Extra1}}</td>
+                                <td>{{item.Extra2}}</td>
+                                <td>{{item.Remarks}}</td>
+                                <td ng-click="delete(item)"><span class="label label-danger">Delete</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+    </section>
+
+</div>
+

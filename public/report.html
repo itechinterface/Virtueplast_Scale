@@ -1,0 +1,404 @@
+<div class="content-wrapper" style="height:1000vh">
+
+    <section class="content-header">
+        <h1>
+            REPORTS
+        </h1>
+    </section>
+
+    <section class="content" style="min-height:0px">
+
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-6 connectedSortable">
+
+                <!-- quick email widget -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">MATERIAL DISPATCH</h3>
+                    </div>
+                    <div class="box-body">
+                        <form>
+                            <div class="form-group col-lg-4">
+                                <label>SELECT TYPE</label>
+                                <select class="form-control" ng-model="Model.selectedType" ng-options="item as item.Type for item in Model.type"></select>
+                            </div>
+                            <div class="form-group col-lg-8">
+                                <label>ENTER INVOICE NO.</label>
+                                <input type="text" ng-model="Model.invoice"  class="form-control" name="" placeholder="">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>FILTER BY MATERIAL</label>
+                                <select class="form-control" ng-model="Model.selectedMaterial" ng-options="item as item.Quality + ' , ' + item.Company for item in Model.materialList"></select>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>FILTER BY COMPANY</label>
+                                <select class="form-control" ng-model="Model.selectedCompany" ng-options="item as item.Name + ' , ' + item.Location for item in Model.companyList"></select>
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <label>FILTER BY FROM DATE</label>
+                                <input class="form-control" type="date"  name="input" ng-model="Model.fromdate"
+                                       placeholder="yyyy-MM-dd"  required />
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>FILTER BY TO DATE</label>
+                                <input class="form-control" type="date"  name="input" ng-model="Model.todate"
+                                       placeholder="yyyy-MM-dd"  required />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div class="box-body col-lg-4">
+                            <button ng-click="search()" type="button" class="btn btn-block btn-primary btn-md">SEARCH</button>
+                        </div>
+                        <div class="box-body col-lg-4">
+                            <button ng-click="clear()" type="button" class="btn btn-block btn-primary btn-md">CLEAR ALL</button>
+                        </div>
+                        <!--<div class="box-body col-lg-4">-->
+                            <!--<button ng-click="download()" type="button" class="btn btn-block btn-primary btn-md">DOWNLOAD</button>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </section>
+
+            <section class="col-lg-6 connectedSortable">
+
+                <!-- quick email widget -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">GENERAL REPORT</h3>
+                    </div>
+                    <div class="box-body">
+                        <form>
+                            <div class="form-group col-lg-4">
+                                <label>FILTER BY LOOM No</label>
+                                <select class="form-control" ng-model="Model.selectedLoom" ng-options="item as item.Name for item in Model.loomList"></select>
+                            </div>
+                            <div class="form-group col-lg-8">
+                                <label>FILTER BY MATERIAL</label>
+                                <select class="form-control" ng-model="Model.selectedMaterial2" ng-options="item as item.Quality + ' , ' + item.Company for item in Model.materialList"></select>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>FILTER BY PROCESS</label>
+                                <select class="form-control" ng-model="Model.selectedProcess" ng-options="item as item.Type for item in Model.process"></select>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>FILTER BY FROM DATE</label>
+                                <input class="form-control" type="date"  name="input" ng-model="Model.fromdate2"
+                                       placeholder="yyyy-MM-dd"  required />
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>FILTER BY TO DATE</label>
+                                <input class="form-control" type="date"  name="input" ng-model="Model.todate2"
+                                       placeholder="yyyy-MM-dd"  required />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div class="box-body col-lg-4">
+                            <button ng-click="search2()" type="button" class="btn btn-block btn-primary btn-md">SEARCH</button>
+                        </div>
+                        <div class="box-body col-lg-4">
+                            <button ng-click="clear2()" type="button" class="btn btn-block btn-primary btn-md">CLEAR ALL</button>
+                        </div>
+                        <!--<div class="box-body col-lg-4">-->
+                            <!--<button ng-click="download2()" type="button" class="btn btn-block btn-primary btn-md">DOWNLOAD</button>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="col-lg-12 connectedSortable">
+
+                <!-- quick email widget -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">MATERIAL WISE NET POSITION</h3>
+                    </div>
+                    <div class="box-body">
+                        <form>
+                            <div class="form-group col-lg-8">
+                                <label>FILTER BY MATERIAL</label>
+                                <select class="form-control" ng-model="Model.selectedMaterial3" ng-options="item as item.Quality + ' , ' + item.Company for item in Model.materialList"></select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div class="box-body col-lg-2">
+                            <button ng-click="search3()" type="button" class="btn btn-block btn-primary btn-md">SEARCH</button>
+                        </div>
+                        <div class="box-body col-lg-2">
+                            <button ng-click="clear3()" type="button" class="btn btn-block btn-primary btn-md">CLEAR ALL</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+
+        <div class="row" ng-if="Model.total_bundle">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding" style="font-size: medium">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Total Finishing Goods</th>
+                                <th>Total Direct Sales Goods</th>
+                                <th>Total Bags Dispatched</th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Gross</th>
+                                            <th>Tare</th>
+                                            <th>Net</th>
+                                        </tr>
+                                        <tr ng-if="Model.total_finish">
+                                            <th>{{Model.total_finish[0].TotalGross}}</th>
+                                            <th>{{Model.total_finish[0].TotalTare}}</th>
+                                            <th>{{Model.total_finish[0].TotalNet}}</th>
+                                        </tr>
+                                    </table>
+                                </th>
+                                <th>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Gross</th>
+                                            <th>Tare</th>
+                                            <th>Net</th>
+                                        </tr>
+                                        <tr ng-if="Model.total_direct">
+                                            <th>{{Model.total_finish[0].TotalGross}}</th>
+                                            <th>{{Model.total_finish[0].TotalTare}}</th>
+                                            <th>{{Model.total_finish[0].TotalNet}}</th>
+                                        </tr>
+                                    </table>
+                                </th>
+                                <th>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Gross</th>
+                                            <th>Tare</th>
+                                            <th>Net</th>
+                                        </tr>
+                                        <tr ng-if="Model.total_bundle">
+                                            <th>{{Model.total_finish[0].TotalGross}}</th>
+                                            <th>{{Model.total_finish[0].TotalTare}}</th>
+                                            <th>{{Model.total_finish[0].TotalNet}}</th>
+                                        </tr>
+                                    </table>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+        <div class="row" ng-show="Model.bagsList.length > 0">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding" style="font-size: medium">
+                        <button export-to-csv>Download CSV</button>
+                        <table class="table table-hover">
+                            <tr>
+                                <th>SrNo</th>
+                                <th>InvoiceNo</th>
+                                <th>Gross</th>
+                                <th>Tare</th>
+                                <th>Net</th>
+                                <th>Quality</th>
+                                <th>To Company</th>
+                            </tr>
+                            <tr ng-repeat="item in Model.bagsList track by $index">
+                                <th>{{$index+1}}</th>
+                                <td>{{item.InvoiceNo}}</td>
+                                <td>{{item.Gross.toFixed(3)}}</td>
+                                <td>{{item.Tare.toFixed(3)}}</td>
+                                <td>{{item.Net.toFixed(3)}}</td>
+                                <td>{{item.Quality.replace(",","")}}</td>
+                                <td>{{item.ToCompany.replace(",","")}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+        <div class="row" ng-show="Model.rollsList.length > 0">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding" style="font-size: medium">
+                        <button export-to-csv>Download CSV</button>
+                        <table class="table table-hover">
+                            <tr>
+                                <th>SrNo</th>
+                                <th>InvoiceNo</th>
+                                <th>Barcode</th>
+                                <th>Gross</th>
+                                <th>Tare</th>
+                                <th>Net</th>
+                                <th>Meter</th>
+                                <th>Quality</th>
+                                <th>To Company</th>
+                            </tr>
+                            <tr ng-repeat="item in Model.rollsList track by $index">
+                                <th>{{$index+1}}</th>
+                                <td>{{item.InvoiceNo}}</td>
+                                <th>{{item.LastBarcode}}</th>
+                                <td>{{item.Gross.toFixed(3)}}</td>
+                                <td>{{item.Tare.toFixed(3)}}</td>
+                                <td>{{item.Net.toFixed(3)}}</td>
+                                <td>{{item.Meter}}</td>
+                                <td>{{item.Quality.replace(",","")}}</td>
+                                <td>{{item.ToCompany.replace(",","")}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+
+        <div class="row" ng-show="Model.processDataList.length > 0">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding" style="font-size: medium">
+                        <button export-to-csv>Download CSV</button>
+                        <table class="table table-hover">
+                            <tr>
+                                <th>SrNo</th>
+                                <th>Quality</th>
+                                <th>Company</th>
+                                <th>Barcode</th>
+                                <th>Gross</th>
+                                <th>Tare</th>
+                                <th>Net</th>
+                                <th>Net.Diff.</th>
+                                <th>Meter</th>
+                            </tr>
+                            <tr ng-repeat="item in Model.processDataList track by $index">
+                                <th>{{$index+1}}</th>
+                                <td>{{item.Quality.replace(",","")}}</td>
+                                <td>{{item.Company.replace(",","")}}</td>
+                                <th>{{item.Barcode}}</th>
+                                <td>{{item.Gross.toFixed(3)}}</td>
+                                <td>{{item.Tare.toFixed(3)}}</td>
+                                <td>{{item.Net.toFixed(3)}}</td>
+                                <td>{{item.NetDiff.toFixed(3)}}</td>
+                                <td>{{item.Meter}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+
+        <div class="row" ng-show="Model.allDataList.length > 0">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding" style="font-size: medium">
+                        <button export-to-csv>Download CSV</button>
+                        <table class="table table-hover">
+                            <tr>
+                                <th>SrNo</th>
+                                <th style="width:100px;background-color: oldlace">Quality</th>
+                                <th style="width:60px">Company</th>
+
+                                <th style="width:30px;background-color: oldlace">A-No</th>
+                                <th style="width:30px">A-Gross</th>
+                                <th style="width:30px;background-color: oldlace">A-Tare</th>
+                                <th style="width:30px">A-Net</th>
+                                <th style="width:30px;background-color: oldlace">A-Meter</th>
+
+                                <th style="width:30px">B-No</th>
+                                <th style="width:30px;background-color: oldlace">B-Multiple</th>
+                                <th style="width:30px">B-Gross</th>
+                                <th style="width:30px;background-color: oldlace">B-Tare</th>
+                                <th style="width:30px">B-Net</th>
+                                <th style="width:30px;background-color: oldlace">B-NetDiff</th>
+                                <th style="width:30px">B-Meter</th>
+
+
+                                <th style="width:30px;background-color: oldlace">C-No</th>
+                                <th style="width:30px">C-Multiple</th>
+                                <th style="width:30px;background-color: oldlace">C-Gross</th>
+                                <th style="width:30px">C-Tare</th>
+                                <th style="width:30px;background-color: oldlace">C-Net</th>
+                                <th style="width:30px">C-NetDiff</th>
+                                <th style="width:30px;background-color: oldlace">C-Meter</th>
+
+
+                                <th style="width:30px">D-No</th>
+
+                                <th style="width:30px;background-color: oldlace">E-No</th>
+
+
+                            </tr>
+                            <tr ng-repeat="item in Model.allDataList track by $index">
+                                <th>{{$index+1}}</th>
+                                <td style="width:10%;background-color: oldlace">{{item.Quality.replace(",","")}}</td>
+                                <td style="width:60px">{{item.Company.replace(",","")}}</td>
+                                <th style="width:30px;background-color: oldlace">{{item.A_No}}</th>
+                                <th style="width:30px;">{{item.A_Gross}}</th>
+                                <th style="width:30px;background-color: oldlace">{{item.A_Tare}}</th>
+                                <th style="width:30px;">{{item.A_Net}}</th>
+                                <th style="width:30px;background-color: oldlace">{{item.A_Meter}}</th>
+
+                                <th style="width:30px;">{{item.B_No}}</th>
+                                <th style="width:30px;background-color: oldlace">{{item.B_Multiple}}</th>
+                                <th style="width:30px;">{{item.B_Gross}}</th>
+                                <th style="width:30px;background-color: oldlace">{{item.B_Tare}}</th>
+                                <th style="width:30px;">{{item.B_Net}}</th>
+                                <th style="width:30px;background-color: oldlace">{{item.B_NetDiff}}</th>
+                                <th style="width:30px;">{{item.B_Meter}}</th>
+
+
+                                <th style="width:30px;background-color: oldlace">{{item.C_No}}</th>
+                                <th style="width:30px;">{{item.C_Multiple}}</th>
+                                <th style="width:30px;background-color: oldlace">{{item.C_Gross}}</th>
+                                <th style="width:30px;">{{item.C_Tare}}</th>
+                                <th style="width:30px;background-color: oldlace">{{item.C_Net}}</th>
+                                <th style="width:30px;">{{item.C_NetDiff}}</th>
+                                <th style="width:30px;background-color: oldlace">{{item.C_Meter}}</th>
+
+                                <th style="width:30px;">{{item.D_No}}</th>
+
+                                <th style="width:30px;background-color: oldlace">{{item.E_No}}</th>
+
+
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+        <!--$scope.Model.allDataList = response.data.data;-->
+        <!--$scope.Model.processDataList = [];-->
+
+
+
+    </section>
+
+</div>
