@@ -497,6 +497,26 @@ module.exports = function(app,io) {
 		});
 	}
 	
+
+	app.get('/api/getProductMaster',function (req,res) {
+
+		var sql = "SELECT *,(SELECT Count(*) Count FROM production_data where production_data.ProductId = product_master.Id and Status = 1 and IsActive = 1) as Count from product_master where IsActive = 1 order by Weight asc";
+		debugConsole(sql);
+		con.query(sql, function (err, result) {
+			if (err) {
+				res.json({'error':true,'message':'Database Error'});
+				return;
+			}
+
+			if(result.length > 0){
+				res.json({'error':false,'data':result});
+			}
+			else{
+				res.json({'error':false,'data':[]});
+			}
+		});
+	});
+	
 	// --------------- Reset Packing-Count ------------------
 
 	app.get('/api/getPackingCount',function (req,res) {
