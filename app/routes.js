@@ -252,8 +252,16 @@ module.exports = function(app,io) {
 						return printer;
 					});
 				}
+				else{
+					setTimeout(function(){
+						initPrinter();
+					},1000);
+				}
 			}
 			catch(err){
+				setTimeout(function(){
+					initPrinter();
+				},1000);
 				console.log("Error on printer"+err);
 			}
 		}
@@ -550,29 +558,35 @@ module.exports = function(app,io) {
 		var username =  req.body.username;
 		var password =  req.body.password;
 
-		sql = "SELECT * FROM user_master where Username = '"+username+"' and Password = '"+password+"' and Role = 1 and IsActive = 1";
-		debugConsole(sql);
-		con.query(sql, function (err, result) {
-			if(result)
-			{
-				if(result.length == 0)
+		if(printer == undefined)
+		{
+			res.json({'error':true,'message':'Please Power on the Printer.'});
+		}
+		else{
+			sql = "SELECT * FROM user_master where Username = '"+username+"' and Password = '"+password+"' and Role = 1 and IsActive = 1";
+			debugConsole(sql);
+			con.query(sql, function (err, result) {
+				if(result)
 				{
+					if(result.length == 0)
+					{
+						res.json({'error':true,'message':'Invalid Username or Password !'});
+					}
+					else
+					{
+						var result_obj = result;
+						sql = "update user_master set LastLogin = now() where Id = "+result[0].Id;
+						debugConsole(sql);
+						con.query(sql, function (err, result) {
+							res.json({'error':false,'data':result_obj});
+						});
+					}
+				}
+				else{
 					res.json({'error':true,'message':'Invalid Username or Password !'});
 				}
-				else
-				{
-					var result_obj = result;
-					sql = "update user_master set LastLogin = now() where Id = "+result[0].Id;
-					debugConsole(sql);
-					con.query(sql, function (err, result) {
-						res.json({'error':false,'data':result_obj});
-					});
-				}
-			}
-			else{
-				res.json({'error':true,'message':'Invalid Username or Password !'});
-			}
-		});
+			});
+		}
 	});
 
 	// ------------------ Production Data ------------------------
