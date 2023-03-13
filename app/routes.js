@@ -2,13 +2,13 @@ module.exports = function(app,io) {
 
 	var exec = require('child_process').exec;
 	var fs = require('fs');
-	//var gpio = require('rpi-gpio');
+	var gpio = require('rpi-gpio');
 
 	var logger_path = "/home/pi/shipper_log.csv";
 	var force_print_logger_path = "/home/pi/shipper_forceprint_log.csv";
 
 	getGeneralSettings();
-	initPrinter();
+	
 	var mysql = require('mysql');
 
 	// GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'Ashwin!@#2023' WITH GRANT OPTION;
@@ -93,7 +93,7 @@ module.exports = function(app,io) {
 		return reversed;
 	}
 
-	/*
+	
 	var delay = 1000;
 	gpio.destroy();
 	gpio.reset();
@@ -116,8 +116,8 @@ module.exports = function(app,io) {
 	});
 
 	gpio.setup(16, gpio.DIR_IN, gpio.EDGE_BOTH);
-	*/
-	//var SerialPort = require('serialport');
+	
+	var SerialPort = require('serialport');
         //const Readline = SerialPort.parsers.Readline;
         
 	function getGeneralSettings() {
@@ -160,6 +160,7 @@ module.exports = function(app,io) {
                                                    
 	
 	var printer = undefined;
+	initPrinter();
 	function initPrinter() {
         //console.log("Connecting Printer");
 		if(printer == undefined)
@@ -167,7 +168,7 @@ module.exports = function(app,io) {
 			try{
 				if (fs.existsSync('/dev/usb/lp0')) {
 					var result = exec("echo RaspberryPi | sudo -S chmod a+rw /dev/usb/lp0", function (error, stdout, stderr) {
-                                                console.log("Printer Ok");
+                        console.log("Printer Ok");
 						console.log(error);
 						try{
 							printer = new SerialPort('/dev/usb/lp0', { baudrate: 9600});
