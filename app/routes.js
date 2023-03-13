@@ -7,9 +7,8 @@ module.exports = function(app,io) {
 	var logger_path = "/home/pi/shipper_log.csv";
 	var force_print_logger_path = "/home/pi/shipper_forceprint_log.csv";
 
-
-
 	getGeneralSettings();
+	initPrinter();
 	var mysql = require('mysql');
 
 	// GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'Ashwin!@#2023' WITH GRANT OPTION;
@@ -144,16 +143,16 @@ module.exports = function(app,io) {
 							io.sockets.emit('message', data.toString());
 						});
 					});
-					initPrinter();
+					//initPrinter();
 				});
 			}
 			else{
-				initPrinter();
+				//initPrinter();
 			}
 		}
 		catch (err) {
 			console.log("No Weight Attached");
-			initPrinter();
+			//initPrinter();
 		}
 	}
 
