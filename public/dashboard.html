@@ -82,7 +82,7 @@
                         <h3 class="box-title">DUPLICATE PRINT - ENTER BARCODE NO</h3>
                     </div>
                     <div class="box-body">
-                        <input ng-model="Model.duplicate" ng-keypress="duplicate($event)" class="form-control input-lg" type="text" placeholder="">
+                        <input ng-model="Model.duplicate" ng-keypress="$event.keyCode === 13 && duplicate($event)" class="form-control input-lg" type="text" placeholder="">
                     </div>
                     <!-- /.box-body -->
                 </div>

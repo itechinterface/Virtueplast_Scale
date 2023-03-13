@@ -325,18 +325,18 @@ app.controller("DashboardCtrl", function(socket,$scope,$interval,$timeout,$rootS
     }
 
     $scope.duplicate = function (event) {
-        if($scope.Model.duplicate == undefined || $scope.Model.duplicate.length == 0)
-        {
-            alert("Please Enter Valid Barcode No.");
-            return;
-        }
-        if($scope.Model.printcopy == undefined || $scope.Model.printcopy.length == 0)
-        {
-            alert("Please Enter Print Copy");
-            return;
-        }
         if(event.keyCode == 13)
         {
+            if($scope.Model.duplicate == undefined || $scope.Model.duplicate.length == 0)
+            {
+                alert("Please Enter Valid Barcode No.");
+                return;
+            }
+            if($scope.Model.printcopy == undefined || $scope.Model.printcopy.length == 0)
+            {
+                alert("Please Enter Print Copy");
+                return;
+            }
             $http({
                 url: '/api/duplicate_print',
                 method: "POST",
@@ -443,7 +443,7 @@ app.controller("DashboardCtrl", function(socket,$scope,$interval,$timeout,$rootS
         if($scope.Model.remarks == undefined)
             $scope.Model.remarks = "";
 
-        lastWeight  = 23.14;   
+        //lastWeight  = 23.14;   
         var net = parseFloat(parseFloat(lastWeight) - parseFloat($scope.Model.tareWeight));
         net = parseFloat(net).toFixed(2);
 
