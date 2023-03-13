@@ -12,24 +12,24 @@ module.exports = function(app,io) {
 	getGeneralSettings();
 	var mysql = require('mysql');
 
-	// GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'accent@123' WITH GRANT OPTION;
+	// GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'Ashwin!@#2023' WITH GRANT OPTION;
 	// FLUSH PRIVILEGES;
 
-	var con = mysql.createConnection({
-		host: "cloud-db.c1aefstrp0sv.ap-south-1.rds.amazonaws.com",
-		user: "admin",
-		password: "Satyamev516",
-		database: "virtueplast_latest",
-		acquireTimeout: 1000000
-	});
-
 	// var con = mysql.createConnection({
-	// 	host: "68.178.162.131",
+	// 	host: "cloud-db.c1aefstrp0sv.ap-south-1.rds.amazonaws.com",
 	// 	user: "admin",
-	// 	password: "Virtueplast@2023",
-	// 	database: "virtueplast",
+	// 	password: "Satyamev516",
+	// 	database: "virtueplast_latest",
 	// 	acquireTimeout: 1000000
 	// });
+
+	var con = mysql.createConnection({
+		host: "68.178.172.105",
+		user: "admin",
+		password: "Ashwin!@#2023",
+		database: "virtueplast",
+		acquireTimeout: 1000000
+	});
 
 	// var con = mysql.createConnection({
 	// 	host: "192.168.0.8",
