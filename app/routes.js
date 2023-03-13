@@ -135,84 +135,13 @@ module.exports = function(app,io) {
 					port.on('open', function () {
 						console.log("Open");
 						port.on('data', function (data) {
-
-
-                                                        /*var data = data.toString('utf8');
-                                                        console.log(data);
-                                                        data = data.replace(' ','');
-                                                        data = data.replace('\r','');
-                                                        data = data.replace('\n','');
-
-                                                        if(data.length == 0)
-                                                        {
-                                                            if(parseInt(str) != NaN && str.length > 0)
-                                                            {
-                                                                if(isNaN(str) == true || str.length > 7)
-                                                                {
-                                                                    str = '';
-                                                                }
-                                                                else{
-                                                                    console.log(parseInt(str));
-                                                                    io.sockets.emit('message', str.toString());
-                                                                    str = '';
-                                                                }
-                                                            }
-                                                        }
-                                                        else
-                                                            str = str+""+data;
-                                                        */
-                                                        //-----------------------------------------------
-
-
-
-                                                        var data = data.toString('utf8');
-							data = data.replace(" ","");
-                                                        data = data.replace(".","");
-							//console.log(parseInt(data));
-							//data = parseInt(data);
-							
+							var data = data.toString('utf8');
+							data = data.replace('.','');
+							data = data.replace('.','');
+							//console.log(data);
 							if(data == NaN)
-								return;
-							
-							//if(data < 10)
-							//	data = "00"+""+data.toString();
-							//console.log(parseInt(data));
+									return;
 							io.sockets.emit('message', data.toString());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        
-                                                        /*var data = data.toString('utf8');
-							data = data.replace(" ","");
-							//console.log(parseInt(data));
-							//data = parseInt(data);
-							//data = parseFloat(data)/100;
-                                                        //data = parseInt(data);
-
-							if(data == NaN)
-								return;
-							
-							if(data < 10)
-                                                            data = "00"+""+data.toString();
-                                                        console.log(parseInt(data));
-							io.sockets.emit('message', data.toString());*/
-                                                         
 						});
 					});
 					initPrinter();
@@ -233,7 +162,7 @@ module.exports = function(app,io) {
 	
 	var printer = undefined;
 	function initPrinter() {
-                //console.log("Connecting Printer");
+        //console.log("Connecting Printer");
 		if(printer == undefined)
 		{
 			try{
@@ -381,7 +310,7 @@ module.exports = function(app,io) {
 		if(printer_ == undefined)
 			return;
 		//console.log(printer_);
-		printer_.write("^XA", function(err) {
+		printer_.write("^XA^PR14^MD24^PW799^LL599^LS0", function(err) {
         });
 		printer_.write("^FX", function(err) {
                
@@ -468,7 +397,7 @@ module.exports = function(app,io) {
 		return s;
 	}
 
-	var deleteRows = [];
+	/*var deleteRows = [];
 	setTimeout(function(){
 		var sql = "SELECT * FROM production_data WHERE Barcode IN (SELECT Barcode FROM production_data GROUP BY Barcode HAVING COUNT(Barcode) > 1) order by Barcode";
 		debugConsole(sql);
@@ -488,7 +417,7 @@ module.exports = function(app,io) {
 			//deleteSingle(deleteRows[0],0);
 			
 		});
-	},1000);
+	},1000);*/
 
 	function deleteSingle(id,index)
 	{
