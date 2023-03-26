@@ -30,6 +30,42 @@ module.exports = function(app,io) {
 		acquireTimeout: 1000000
 	});
 
+	var is_last_disconnedted = false;
+	function checkInternet(cb) {
+		const exec = require('child_process').exec;
+		function process(error, stdout, stderr) {
+			if(stdout.toString().indexOf("1 packets received")!=-1)
+				cb(true);
+			else
+				cb(false);
+		}
+		exec("ping -c 1 68.178.172.105", process);
+	}
+
+	setInterval(function(){
+		checkInternet(function(isConnected) {
+			if (isConnected) {
+				if(is_last_disconnedted)
+				{
+					setTimeout(function(){
+						con.connect(function(err) {
+							//if (err) throw err;
+							if (err) console.log(err);
+							console.log("Connected!");
+						});
+					},1000);
+				}
+				//console.log("Reply");
+				is_last_disconnedted = false;
+				io.sockets.emit('reply',true);
+			} else {
+				//console.log("Not Reply");
+				is_last_disconnedted = true;
+				io.sockets.emit('reply',false);
+			}
+		});
+	},3000);
+	
 	// var con = mysql.createConnection({
 	// 	host: "192.168.0.8",
 	// 	user: "admin",
@@ -51,7 +87,8 @@ module.exports = function(app,io) {
 	console.log(parseInt(scale_id));
 	
 	con.connect(function(err) {
-		if (err) throw err;
+		//if (err) throw err;
+		if (err) console.log(err);
 		console.log("Connected!");
 	});
 
@@ -212,6 +249,7 @@ module.exports = function(app,io) {
 		setTimeout(function () {
 			var sql = "SELECT * from ping_pong";
 			con.query(sql, function (err, result) {
+				console.log(result);
 			});
 			setTimeout(function () {
 				pingpong();
@@ -487,11 +525,11 @@ module.exports = function(app,io) {
 		var username =  req.body.username;
 		var password =  req.body.password;
 		
-		if(printer == undefined)
-		{
-			res.json({'error':true,'message':'Please Power on the Printer.'});
-		}
-		else{
+		//if(printer == undefined)
+		//{
+		//	res.json({'error':true,'message':'Please Power on the Printer.'});
+		//}
+		//else{
 			sql = "SELECT * FROM user_master where Username = '"+username+"' and Password = '"+password+"' and Role = 1 and IsActive = 1";
 			debugConsole(sql);
 			con.query(sql, function (err, result) {
@@ -515,7 +553,7 @@ module.exports = function(app,io) {
 					res.json({'error':true,'message':'Invalid Username or Password !'});
 				}
 			});
-		}
+		//}
 	});
 
 	// ------------------ Production Data ------------------------

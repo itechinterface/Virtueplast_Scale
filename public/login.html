@@ -1,5 +1,8 @@
 <div class="content-wrapper" style="height:80vh">
-    <section class="content-header">
+    <section class="content-header" style="text-align:right;font-size:xx-large">
+        <a ng-if="Model.reply" style="background-color:rgb(4, 160, 4);color: white;"><b>CONNECTED</a><br>
+            <a ng-if="!Model.reply" style="background-color:red;color: white;"><b>DISCONNECTED</a><br>
+        
     </section>
     <div class="login-box">
         <div class="login-logo">

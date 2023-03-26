@@ -100,6 +100,10 @@ app.directive('keyshortcut', ['$rootScope','socket',function(rootScope,socket) {
                 rootScope.$broadcast('printdone',data);
             });
 
+            socket.on('reply', function (data) {
+                rootScope.$broadcast('reply',data);
+            });
+
 
         }
     };
@@ -169,6 +173,18 @@ app.controller("main",function (socket,$scope,$interval,$timeout,$rootScope,$htt
 app.controller("LoginCtrl",function (socket,$scope,$interval,$timeout,$rootScope,$http,$window,$location,$q,$sce,$filter,CommonControl,Session) {
 
     $scope.Model = {};
+
+    var destroy_reply;
+
+    $scope.Model.reply = false;
+    destroy_reply = $rootScope.$on('reply', function (evt,data) {
+        console.log(data);
+        $scope.Model.reply = data;
+    });
+    
+    $scope.$on('$destroy', function() {
+        destroy_reply();
+     });  
 
     $scope.Model.shift = [{"Name":"1","Id":1},{"Name":"2","Id":2},{"Name":"3","Id":3}];
     $scope.Model.selectedShift = undefined;
@@ -243,6 +259,14 @@ app.controller("DashboardCtrl", function(socket,$scope,$interval,$timeout,$rootS
     var destroy_forceprint;
     var destroy_printdone;
     var destroy_weight;
+
+    var destroy_reply;
+
+    $scope.Model.reply = false;
+    destroy_reply = $rootScope.$on('reply', function (evt,data) {
+        console.log(data);
+        $scope.Model.reply = data;
+    });
     
     destroy_weight = $rootScope.$on('onWeightChange', function (evt,data) {
 
@@ -267,6 +291,7 @@ app.controller("DashboardCtrl", function(socket,$scope,$interval,$timeout,$rootS
        destroy_forceprint();
        destroy_printdone();
        destroy_weight();
+       destroy_reply();
     });  
 
     destroy_printdone = $rootScope.$on('printdone', function (evt,data) {
@@ -415,6 +440,12 @@ app.controller("DashboardCtrl", function(socket,$scope,$interval,$timeout,$rootS
     }
 
     $scope.save = function () {
+
+        if($scope.Model.reply == false)
+        {
+            alert("Internet connection is not available...");
+            return;
+        }
 
         if($scope.Model.selectedProduct == undefined)
         {
